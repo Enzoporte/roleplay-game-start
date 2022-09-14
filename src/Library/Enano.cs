@@ -85,6 +85,22 @@ public class Enano
         }
     }
 
+    public int getAtaque(){
+        return ataque;
+    }
+
+    public string getNombre(){
+        return nombre;
+    }
+
+    public int getDefensa(){
+        return defensa;
+    }
+
+    public bool isVivo(){
+        return isVivo;
+    }
+
     //Constructor  -->
 
     private string nombre;
@@ -103,10 +119,4 @@ public class Enano
 
         /*this.objetos = Objetos[];*/
     }
-
-
-
-
-
-
 }
