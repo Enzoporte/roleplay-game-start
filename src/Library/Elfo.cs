@@ -19,7 +19,7 @@ namespace Rolplay
         public void AtaqueEnano(Enano other)
         {
             if (other.isVivo) {
-                other.vida -= this.ataque;
+                other.vida -= this.Ataque;
                 if (other.vida >= 0)
                 {
                     other.isVivo = false;
@@ -30,7 +30,7 @@ namespace Rolplay
         public void AtaqueElfo(Elfo other)
         {
             if (other.isVivo) {
-                other.vida -= this.ataque;
+                other.vida -= this.Ataque;
                 if (other.vida >= 0)
                 {
                     other.isVivo = false;
@@ -41,7 +41,7 @@ namespace Rolplay
         public void AtaqueMago(Mago other)
         {
             if (other.isVivo) {
-                other.vida -= this.ataque;
+                other.vida -= this.Ataque;
                 if (other.vida >= 0)
                 {
                     other.isVivo = false;
