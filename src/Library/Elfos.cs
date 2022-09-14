@@ -16,20 +16,39 @@ namespace Rolplay
             this.Defensa = 0;
         }
 
-        // public void AtaqueEnano(Enano Object)
-        // {
-        //     if Object.isVivo()
-        //     {
+        public void AtaqueEnano(Enano other)
+        {
+            if (other.isVivo) {
+                other.vida -= this.ataque;
+                if (other.vida =< 0)
+                {
+                    other.isVivo = false;
+                }
+            }
+        }
 
-        //     }
-        // }
+        public void AtaqueElfo(Elfo other)
+        {
+            if (other.isVivo) {
+                other.vida -= this.ataque;
+                if (other.vida =< 0)
+                {
+                    other.isVivo = false;
+                }
+            }
+        }
 
-        // public void AtaqueElfo(Enano Object)
-        // {
-        //     if Object.isVivo()
-        //     {
+        public void AtaqueMago(Mago other)
+        {
+            if (other.isVivo) {
+                other.vida -= this.ataque;
+                if (other.vida =< 0)
+                {
+                    other.isVivo = false;
+                }
+            }
+        }
 
-        //     }
-        // }
+        
     }
 }
