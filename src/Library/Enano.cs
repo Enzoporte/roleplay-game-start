@@ -1,112 +1,126 @@
 ﻿using System;
+namespace Roleplay{
 
-public class Enano
-{
-	public void AtaqueElfo(Elfo other)
-	{
-        if (other.isVivo)
+    public class Enano
+    {
+        //Constructor  -->
+
+        private string nombre;
+        private float vida;
+        private int ataque;
+        private int defensa;
+        private bool isVivo;
+
+        public Enano(String Nombre)
         {
-            other.vida -= this.ataque;
-            if (other.vida =< 0)
+            this.nombre = Nombre;
+            this.vida = Vida;
+            this.ataque = Ataque;
+            this.defensa = Defensa;
+            this.isVivo = true;
+
+            /*this.objetos = Objetos[];*/
+        }
+        public string Nombre {get;}
+        public float Vida {get; set;}
+        public int Ataque {get;}
+        public int Defensa {get;}
+        public bool IsVivo {get; set;}
+
+        public void AtaqueElfo(Elfo other)
+        {
+            if (!(other.isVivo)) 
+            {
+                Console.WriteLine("Dejalo, ya está muerto");
+                return;
+            }
+
+            other.Vida -= this.ataque;
+            if (other.Vida <= 0)
             {
                 other.isVivo = false;
             }
         }
-    }
 
-    public void AtaqueMago(Mago other)
-    {
-        if (other.isVivo)
+        public void AtaqueMago(Mago other)
         {
-            other.vida -= this.ataque;
-            if (other.vida =< 0)
+            if (!(other.isVivo)) 
+            {
+                Console.WriteLine("Dejalo, ya está muerto");
+                return;
+            }
+
+            other.Vida -= this.ataque;
+            if (other.Vida <= 0)
             {
                 other.isVivo = false;
             }
         }
-    }
 
-    public void AtaqueEnano(Enano other)
-    {
-        if (other.isVivo) {
-            other.vida -= this.ataque;
-            if (other.vida =< 0)
+        public void AtaqueEnano(Enano other)
+        {
+            if (!(other.isVivo)) 
+            {
+                Console.WriteLine("Dejalo, ya está muerto");
+                return;
+            }
+
+            other.Vida -= this.ataque;
+            if (other.Vida <= 0)
             {
                 other.isVivo = false;
             }
         }
-    }
 
-    public void AtaqueFuerteMago(Mago other)
-    {
-        if (other.isVivo)
+        public void AtaqueFuerteMago(Mago other)
         {
+            if (!(other.isVivo)) 
+            {
+                Console.WriteLine("Dejalo, ya está muerto");
+                return;
+            }
+
             Random rand = new Random();
-            int Critico = rand.Next(0.5, 1, 5)
-
-
-        other.vida -= this.ataque * Critico;
-            if (other.vida =< 0)
+            float Critico = (float)(rand.NextSingle() + 0.5);
+            other.Vida -= this.ataque * Critico;
+            if (other.Vida <= 0)
             {
                 other.isVivo = false;
             }
         }
-    }
 
-    public void AtaqueFuerteElfo(Elfo other)
-    {
-        if (other.isVivo)
+        public void AtaqueFuerteElfo(Elfo other)
         {
+            if (!(other.isVivo)) 
+            {
+                Console.WriteLine("Dejalo, ya está muerto");
+                return;
+            }
+
             Random rand = new Random();
-            int Critico = rand.Next(0.5, 1, 5)
-
-
-        other.vida -= this.ataque * Critico;
-            if (other.vida =< 0)
+            float Critico = (float)(rand.NextSingle() + 0.5);
+            other.Vida -= this.ataque * Critico;
+            if (other.Vida <= 0)
             {
                 other.isVivo = false;
             }
         }
-    }
 
-    public void AtaqueFuerteEnano(Enano other)
-    {
-        if (other.isVivo)
+        public void AtaqueFuerteEnano(Enano other)
         {
+            if (!(other.isVivo)) 
+            {
+                Console.WriteLine("Dejalo, ya está muerto");
+                return;
+            }
+
             Random rand = new Random();
-            int Critico = rand.Next(0.5, 1, 5)
-
-
-        other.vida -= this.ataque * Critico;
-            if (other.vida =< 0)
+            float Critico = (float)(rand.NextSingle() + 0.5);
+            other.Vida -= this.ataque * Critico;
+            if (other.Vida <= 0)
             {
                 other.isVivo = false;
             }
         }
     }
-
-    //Constructor  -->
-
-    private string nombre;
-    private int vida;
-    private int ataque;
-    private int defensa;
-    private bool isVivo;
-
-    public Enano(String Nombre, int Vida, int Ataque, int Defensa /* Objetos[], obj*/)
-    {
-        this.nombre = Nombre;
-        this.vida = Vida;
-        this.ataque = Ataque;
-        this.defensa = Defensa;
-        this.isVivo = true;
-
-        /*this.objetos = Objetos[];*/
-    }
-
-
-
-
-
-
 }
