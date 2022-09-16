@@ -35,5 +35,39 @@ namespace Roleplay
         public int Defensa {get; set;}
         public bool IsVivo {get; set;}
 
+        public void AtaqueEnano(Enano other)
+        {
+            if (other.isVivo) {
+                other.vida -= this.Ataque;
+                if (other.vida >= 0)
+                {
+                    other.isVivo = false;
+                }
+            }
+        }
+
+        public void AtaqueElfo(Elfo other)
+        {
+            if (other.isVivo) {
+                other.vida -= this.Ataque;
+                if (other.vida >= 0)
+                {
+                    other.isVivo = false;
+                }
+            }
+        }
+
+        public void AtaqueMago(Mago other)
+        {
+            if (other.isVivo) {
+                other.vida -= this.Ataque;
+                if (other.vida >= 0)
+                {
+                    other.isVivo = false;
+                }
+            }
+        }
+
+
     }
 }

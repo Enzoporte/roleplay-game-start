@@ -108,7 +108,7 @@ namespace Roleplay
                 Console.WriteLine("Dejalo, ya está muerto");
                 return;
             }
-
+            
             Random rand = new Random();
             float Critico = (float)(rand.NextSingle() + 0.5);
             other.Vida -= this.ataque * Critico;
