@@ -1,20 +1,39 @@
-namespace Rolplay
+using System;
+
+namespace Roleplay
 {
     public class Elfo
     {
-        public string Nombre;
-        public int Vida;
-        public int Ataque;
-        public int Defensa;
-        // public Elemento[];
+        // Atributos privados nombre, vida, ataque, defensa, inventario y si está vivo el personaje
+        private string nombre;
+        private float vida;
+        private int ataque;
+        private int defensa;
+        private bool isVivo;
+        private int inicialVida = 100;
+        private int inicialAtaque = 1;
+        private int inicialDefensa = 1;
 
-        public Elfo(string nombre)
+        // Constructor: Solo le pasa el nombre en la creación de personaje
+        // Seteamos la vida, ataque y defensa del elfo a sus variables iniciales
+        // isVivo true, porque el personaje aparece vivo.
+        public Elfo(String Nombre)
         {
-            this.Nombre = nombre;
-            this.Vida = 100;
-            this.Ataque = 0;
-            this.Defensa = 0;
+            this.nombre = Nombre;
+            this.vida = inicialVida;
+            this.ataque = inicialAtaque;
+            this.defensa = inicialDefensa;
+            this.isVivo = true;
+
+            /*this.objetos = Objetos[];*/
         }
+
+        // Atributos publicos del Elfo. Acceder y Modificar sus atributos privados.
+        public string Nombre {get;}
+        public float Vida {get; set;}
+        public int Ataque {get; set;}
+        public int Defensa {get; set;}
+        public bool IsVivo {get; set;}
 
         public void AtaqueEnano(Enano other)
         {
