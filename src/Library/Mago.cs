@@ -1,9 +1,10 @@
 using System;
+using System.Collections;
 
 namespace Roleplay
 {
 
-    public class Mago : Personaje, IAtaqueHabilidad
+    public class Mago : Personaje, IAtaqueHabilidad, IInventarioManager
     {
         // Atributos privados nombre, vida, ataque, defensa, inventario y si está vivo el personaje
         private string nombre;
@@ -25,18 +26,18 @@ namespace Roleplay
             this.daño = inicialDaño;
             this.defensa = inicialDefensa;
             this.isVivo = true;
-            // Inventario
+            //this.Inventario = new List<IElemento>();
         }
 
         public void Atacar(Personaje other)
         {
-            if (!(other.IsVivo)) 
+            if (!(other.IsVivo))
             {
                 Console.WriteLine("Dejalo, ya está muerto");
                 return;
             }
 
-            if (other.Defensa < this.Daño) 
+            if (other.Defensa < this.Daño)
             {
                 other.Vida -= (this.Daño - other.Defensa);
                 if (other.Vida <= 0)
@@ -48,7 +49,22 @@ namespace Roleplay
             }
             other.Vida--;
         }
-        
+
+        public void AgregarItem(IElemento Elemento)
+        {
+
+        }
+
+        public void QuitarItem(IElemento Elemento)
+        {
+
+        }
+
+        public void CambiarItem(IElemento Viejo, IElemento Nuevo)
+        {
+
+        }
+
         public void UsarHabilidad(Personaje other)
         {
             // Usar Hechizo del Libro de Hechizos
