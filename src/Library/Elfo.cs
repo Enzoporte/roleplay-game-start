@@ -2,33 +2,38 @@ using System;
 
 namespace Roleplay
 {
-    public class Elfo : Personaje, IAtaqueHabilidad
+    public class Elfo : IPersonaje, IAtaqueHabilidad
     {
         // Atributos privados nombre, vida, ataque, defensa, inventario y si está vivo el personaje
-        private string nombre;
-        private float vida;
-        private int daño;
-        private int defensa;
-        private bool isVivo;
-        private int inicialVida = 100; //También su vida Máxima inicial. Se podría crear otro atributo para vida máxima y que pueda subir
-        private int inicialDaño = 1;
-        private int inicialDefensa = 1;
+        // Propiedades Comunes de los tipos de personajes. Cambian los valores de Defensa y Vida
+        // por ser enanos. Son más duritos
+
+        private int inicialVida = 300;
+        private int inicialAtaque = 10;
+        private int inicialDefensa = 5;
         private int poderCuracion = 10;
+
+        public string Nombre {get; set;}
+        public float Vida {get; set;}
+        public int Daño {get; set;}
+        public int Defensa {get; set;}
+        public bool IsVivo {get; set;}
+        
 
         // Constructor: Solo le pasa el nombre en la creación de personaje
         // Seteamos la vida, ataque y defensa del elfo a sus variables iniciales
         // isVivo true, porque el personaje aparece vivo.
-        public Elfo(String nombre) : base(nombre)
+        public Elfo(String nombre)
         {
-            this.nombre = nombre;
-            this.vida = inicialVida;
-            this.daño = inicialDaño;
-            this.defensa = inicialDefensa;
-            this.isVivo = true;
+            this.Nombre = nombre;
+            this.Vida = inicialVida;
+            this.Daño = inicialAtaque;
+            this.Defensa = inicialDefensa;
+            this.IsVivo = true;
             // Inventario
         }
 
-        public void Atacar(Personaje other)
+        public void Atacar(IPersonaje other)
         {
             if (!(other.IsVivo)) 
             {
@@ -49,7 +54,7 @@ namespace Roleplay
             other.Vida--;
         }
         
-        public void UsarHabilidad(Personaje other)
+        public void UsarHabilidad(IPersonaje other)
         {
             // --- Curar ---
            if (!(other.IsVivo))

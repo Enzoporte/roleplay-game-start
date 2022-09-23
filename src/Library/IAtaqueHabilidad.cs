@@ -2,8 +2,8 @@ namespace Roleplay
 {
     public interface IAtaqueHabilidad
     {
-        void Atacar(Personaje personaje);
-        void UsarHabilidad(Personaje personaje);
+        void Atacar(IPersonaje personaje);
+        void UsarHabilidad(IPersonaje personaje);
 
     }
 }
