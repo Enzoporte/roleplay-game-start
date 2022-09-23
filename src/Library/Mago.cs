@@ -1,62 +1,72 @@
 using System;
 
-namespace Roleplay;
-
-public class Mago
+namespace Roleplay
 {
 
-    public int Vida { get; set; }
-    public int Ataque { get; set; }
-    List<Elemento> ElementosList = new List<Elemento>();
-
-    public Mago(int vida, int ataque, Elemento[] elementos)
+    public class Mago : Personaje, IAtaqueHabilidad
     {
-        this.Vida = vida;
-        this.Ataque = ataque;
-        foreach (Elemento item in elementos)
+        // Atributos privados nombre, vida, ataque, defensa, inventario y si está vivo el personaje
+        private string nombre;
+        private float vida;
+        private int daño;
+        private int defensa;
+        private bool isVivo;
+        private int inicialVida = 100; //También su vida Máxima inicial. Se podría crear otro atributo para vida máxima y que pueda subir
+        private int inicialDaño = 1;
+        private int inicialDefensa = 1;
+
+        // Constructor: Solo le pasa el nombre en la creación de personaje
+        // Seteamos la vida, ataque y defensa del elfo a sus variables iniciales
+        // isVivo true, porque el personaje aparece vivo.
+        public Mago(String nombre) : base(nombre)
         {
-            ElementosList.Add(item);
+            this.nombre = nombre;
+            this.vida = inicialVida;
+            this.daño = inicialDaño;
+            this.defensa = inicialDefensa;
+            this.isVivo = true;
+            // Inventario
         }
-    }
 
-    public string GetElementos()
-    {
-        string str = "";
-        foreach (Elemento item in ElementosList)
+        public void Atacar(Personaje other)
         {
-            str+=item.GetDescripcion();
-        }
-        return str;
-    }
+            if (!(other.IsVivo)) 
+            {
+                Console.WriteLine("Dejalo, ya está muerto");
+                return;
+            }
 
-    public void AtacarMago(Mago mago)
-    {
-        if (this.Ataque-mago.Defensa>0)
+            if (other.Defensa < this.Daño) 
+            {
+                other.Vida -= (this.Daño - other.Defensa);
+                if (other.Vida <= 0)
+                {
+                    other.IsVivo = false;
+                    Console.WriteLine($"{other.Nombre} ha muerto!");
+                }
+                return;
+            }
+            other.Vida--;
+        }
+        
+        public void UsarHabilidad(Personaje other)
         {
-            mago.Vida = mago.Vida - this.Ataque + mago.Defensa;
+            // Usar Hechizo del Libro de Hechizos
         }
-    }
 
-    public void AtacarEnano(Enano enano)
-    {
-        if (this.Ataque-enano.Defensa>0)
+        /* public string GetElementos()
         {
-            enano.Vida = enano.Vida - this.Ataque + enano.Defensa;
+            string str = "";
+            foreach (Elemento item in ElementosList)
+            {
+                str+=item.GetDescripcion();
+            }
+            return str;
         }
-    }
 
-    public void AtacarElfo(Elfo elfo)
-    {
-        if (this.Ataque-elfo.Defensa>0)
+        public void AgregarObjeto(Elemento)
         {
-            elfo.Vida = elfo.Vida - this.Ataque + elfo.Defensa;
-        }
+            ElementosList.Add(Elemento);
+        } */
     }
-
-    public void AgregarObjeto(Elemento)
-    {
-        ElementosList.Add(Elemento);
-    }
-
-    
 }
