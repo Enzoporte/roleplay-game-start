@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Roleplay
 {
@@ -14,11 +15,12 @@ namespace Roleplay
         private int inicialDefensa = 5;
         private int poderCuracion = 10;
 
-        public string Nombre {get; set;}
+        public string Nombre {get;}
         public float Vida {get; set;}
         public int Daño {get; set;}
         public int Defensa {get; set;}
         public bool IsVivo {get; set;}
+        public List<IElemento> Inventario { get; set; }
 
         // Constructor: Solo le pasa el nombre en la creación de personaje
         // Seteamos la vida, ataque y defensa del elfo a sus variables iniciales
@@ -30,7 +32,7 @@ namespace Roleplay
             this.Daño = inicialAtaque;
             this.Defensa = inicialDefensa;
             this.IsVivo = true;
-            // Inventario
+            this.Inventario = new List<IElemento>();
         }
 
         public void Atacar(IPersonaje other)
