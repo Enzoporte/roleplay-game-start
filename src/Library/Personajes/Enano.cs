@@ -34,13 +34,13 @@ namespace Roleplay
         
         public void Atacar(IPersonaje other)
         {
-            if (!(other.IsVivo)) 
+            if (!(other.IsVivo))
             {
                 Console.WriteLine("Dejalo, ya está muerto");
                 return;
             }
 
-            if (other.Defensa < this.Daño) 
+            if (other.Defensa < this.Daño)
             {
                 other.Vida -= (this.Daño - other.Defensa);
                 if (other.Vida <= 0)
@@ -57,7 +57,7 @@ namespace Roleplay
         // Consiste en un ataque randomizado que puede o pegar más, o pegar menos que un ataque normal
         public void UsarHabilidad(IPersonaje other)
         {
-            if (!(other.IsVivo)) 
+            if (!(other.IsVivo))
             {
                 Console.WriteLine("Dejalo, ya está muerto");
                 return;

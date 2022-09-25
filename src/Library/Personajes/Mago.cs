@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Roleplay
 {
 
-    public class Mago : IPersonaje, IAtaqueHabilidad
+    public class Mago : IPersonaje, IAtaqueHabilidad, IInventarioManager
     {
         // Atributos privados nombre, vida, ataque, defensa, inventario y si está vivo el personaje
         // Propiedades Comunes de los tipos de personajes. Cambian los valores de Defensa y Vida
@@ -37,13 +38,13 @@ namespace Roleplay
 
         public void Atacar(IPersonaje other)
         {
-            if (!(other.IsVivo)) 
+            if (!(other.IsVivo))
             {
                 Console.WriteLine("Dejalo, ya está muerto");
                 return;
             }
 
-            if (other.Defensa < this.Daño) 
+            if (other.Defensa < this.Daño)
             {
                 other.Vida -= (this.Daño - other.Defensa);
                 if (other.Vida <= 0)
@@ -55,7 +56,22 @@ namespace Roleplay
             }
             other.Vida--;
         }
-        
+
+        public void AgregarItem(IElemento Elemento)
+        {
+
+        }
+
+        public void QuitarItem(IElemento Elemento)
+        {
+
+        }
+
+        public void CambiarItem(IElemento Viejo, IElemento Nuevo)
+        {
+
+        }
+
         public void UsarHabilidad(IPersonaje other)
         {
             // Usar Hechizo del Libro de Hechizos
