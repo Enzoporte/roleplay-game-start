@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace Roleplay
 {
     public interface IPersonaje
@@ -10,5 +11,8 @@ namespace Roleplay
         int Defensa { get; set; }
         bool IsVivo { get; set; }
 
+        List<IElemento> Inventario { get; set; }
+
+        public void Atacar(IPersonaje p) { }
     }
 }

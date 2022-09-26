@@ -1,20 +1,21 @@
-namespace Roleplay{
+namespace Roleplay
+{
 
-    public class Elemento
+    public class Elemento : IElemento
     {
         private string descripcion;
-        private int ataque;
+        private int daño;
         private int defensa;
         // private int uso; 
-        
-        public string Descripcion {get;}
-        public int Ataque {get;}
-        public int Defensa {get;}
 
-        public Elemento(string descripcion, int ataque, int defensa)
+        public string Descripcion { set; get; }
+        public int Daño { get; set; }
+        public int Defensa { get; set; }
+
+        public Elemento(string descripcion, int daño, int defensa)
         {
             this.Descripcion = descripcion;
-            this.Ataque = ataque;
+            this.Daño = daño;
             this.Defensa = defensa;
         }
     }
