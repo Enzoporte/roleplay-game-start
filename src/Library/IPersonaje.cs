@@ -14,5 +14,6 @@ namespace Roleplay
         List<IElemento> Inventario { get; set; }
 
         public void Atacar(IPersonaje p) { }
+        public void UsarHabilidad(IPersonaje p) { }
     }
 }

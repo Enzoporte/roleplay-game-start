@@ -15,13 +15,13 @@ namespace Roleplay
         private int inicialAtaque = 10;
         private int inicialDefensa = 5;
 
-        public string Nombre {get;}
+        public string Nombre { get; }
         public LibroDeHechizos LibroDeHechizos { get; set; }
-        public float Vida {get; set;}
-        public float VidaMaxima {get; set;}
-        public int Daño {get; set;}
-        public int Defensa {get; set;}
-        public bool IsVivo {get; set;}
+        public float Vida { get; set; }
+        public float VidaMaxima { get; set; }
+        public int Daño { get; set; }
+        public int Defensa { get; set; }
+        public bool IsVivo { get; set; }
         public List<IElemento> Inventario { get; set; }
 
         // Constructor: Le pasa el nombre en la creación de personaje y un Libro (se podría cambiar, porque no es muy reutilizable hacer esto)
@@ -67,7 +67,6 @@ namespace Roleplay
                 Console.WriteLine("Dejalo, ya está muerto");
                 return;
             }
-
             if (other.Defensa < this.LibroDeHechizos.CurrentHechizo.Daño)
             {
                 other.Vida -= (this.LibroDeHechizos.CurrentHechizo.Daño - other.Defensa);

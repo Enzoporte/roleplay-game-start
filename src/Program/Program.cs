@@ -15,25 +15,27 @@ namespace Roleplay
             LibroDeHechizos l = new LibroDeHechizos(hechizo);
 
             //Equipo A
-            IPersonaje mago = new Mago("Gonza el mago", l);
-            IPersonaje elfo = new Elfo("Pablo el elfo");
+            IPersonaje magoA = new Mago("Gonza el mago", l);
+            IPersonaje elfoA = new Elfo("Pablo el elfo");
 
             //Equipo B
-            IPersonaje enano = new Enano("Enzo el enano");
+            IPersonaje enanoB = new Enano("Enzo el enano");
             //--------------------------------------------------
 
-            mago.Atacar(enano);
+            magoA.Atacar(enanoB);
 
             IElemento palo = new Armas("Palo", 1);
-            AgregarItem(palo, enano);
+            AgregarItem(palo, enanoB);
 
-            Console.Write(enano.Vida + "\n");
+            Console.Write(enanoB.Vida + "\n");
 
-            foreach (IElemento a in enano.Inventario)
+            foreach (IElemento a in enanoB.Inventario)
             {
-                Console.Write(a.Descripcion);
+                Console.Write(a.Descripcion + "\n");
             }
 
+            magoA.UsarHabilidad(enanoB);
+            Console.Write(enanoB.Vida + "\n");
         }
     }
 }
