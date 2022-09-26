@@ -1,19 +1,30 @@
+using System;
+using System.Collections.Generic;
+
 namespace Roleplay
 {
-    public class LibroDeHechizos : Elemento
+    public class LibroDeHechizos
     {
-        private string descripcion;
-        private int ataque;
-        private int defensa;
-        private Hechizo[] hechizos;
 
-        public LibroDeHechizos(string descripcion, int ataque, int defensa) : base(descripcion, ataque, defensa)
+        private List<Hechizo> hechizos;
+        private Hechizo currentHechizo;
+
+        public List<Hechizo> Hechizos {get; set;}
+        public Hechizo CurrentHechizo {get;}
+
+        public LibroDeHechizos(List<Hechizo> hechizos)
         {
-            this.descripcion = descripcion;
-            this.ataque = ataque;
-            this.defensa = defensa;
+            this.Hechizos = hechizos;
         }
-        public Hechizo[] Hechizos {get; set;}
+
+        public void SeleccionarHechizo(Hechizo hechizo)
+        {
+            if (Hechizos.Contains(hechizo))
+            {
+                this.currentHechizo = hechizo;
+            }
+            Console.WriteLine("Hechizo no está en el Libro");
+        }
         
 
     }

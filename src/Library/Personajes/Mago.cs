@@ -14,9 +14,9 @@ namespace Roleplay
         private int inicialVida = 300;
         private int inicialAtaque = 10;
         private int inicialDefensa = 5;
-        private int poderCuracion = 10;
 
         public string Nombre {get;}
+        public LibroDeHechizos LibroDeHechizos { get; set; }
         public float Vida {get; set;}
         public float VidaMaxima {get; set;}
         public int Daño {get; set;}
@@ -24,12 +24,13 @@ namespace Roleplay
         public bool IsVivo {get; set;}
         public List<IElemento> Inventario { get; set; }
 
-        // Constructor: Solo le pasa el nombre en la creación de personaje
-        // Seteamos la vida, ataque y defensa del elfo a sus variables iniciales
+        // Constructor: Le pasa el nombre en la creación de personaje y un Libro (se podría cambiar, porque no es muy reutilizable hacer esto)
+        // Seteamos la vida, ataque y defensa del Mago a sus variables iniciales + el hechizo
         // isVivo true, porque el personaje aparece vivo.
-        public Mago(String nombre)
+        public Mago(String nombre, LibroDeHechizos libroDeHechizos)
         {
             this.Nombre = nombre;
+            this.LibroDeHechizos = libroDeHechizos;
             this.Vida = inicialVida;
             this.VidaMaxima = inicialVida;
             this.Daño = inicialAtaque;
@@ -59,39 +60,27 @@ namespace Roleplay
             other.Vida--;
         }
 
-        public void AgregarItem(IElemento Elemento)
-        {
-
-        }
-
-        public void QuitarItem(IElemento Elemento)
-        {
-
-        }
-
-        public void CambiarItem(IElemento Viejo, IElemento Nuevo)
-        {
-
-        }
-
         public void UsarHabilidad(IPersonaje other)
         {
-            // Usar Hechizo del Libro de Hechizos
-        }
-
-        /* public string GetElementos()
-        {
-            string str = "";
-            foreach (Elemento item in ElementosList)
+            if (!(other.IsVivo))
             {
-                str+=item.GetDescripcion();
+                Console.WriteLine("Dejalo, ya está muerto");
+                return;
             }
-            return str;
+
+            if (other.Defensa < this.LibroDeHechizos.CurrentHechizo.Daño)
+            {
+                other.Vida -= (this.LibroDeHechizos.CurrentHechizo.Daño - other.Defensa);
+                if (other.Vida <= 0)
+                {
+                    other.IsVivo = false;
+                    Console.WriteLine($"{other.Nombre} ha muerto!");
+                }
+                return;
+            }
+            other.Vida--;
         }
 
-        public void AgregarObjeto(Elemento)
-        {   
-            ElementosList.Add(Elemento);
-        } */
+
     }
 }

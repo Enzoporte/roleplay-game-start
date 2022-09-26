@@ -1,19 +1,16 @@
 namespace Roleplay{
 
-    public class Hechizo
+    public class Hechizo : IElemento
     {
-        private string descripcion;
-        private int ataque;
-        private int defensa;
         
-        public string Descripcion {get;}
-        public int Ataque {get;}
-        public int Defensa {get;}
+        public string Descripcion {get; set;}
+        public int Daño {get; set;}
+        public int Defensa {get; set;}
 
-        public Hechizo(string descripcion, int ataque, int defensa)
+        public Hechizo(string descripcion, int daño, int defensa)
         {
             this.Descripcion = descripcion;
-            this.Ataque = ataque;
+            this.Daño = daño;
             this.Defensa = defensa;
         }
     }

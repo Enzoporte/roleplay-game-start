@@ -1,13 +1,15 @@
 namespace Roleplay
 {
-    public class Armadura
+    public class Armadura : IElemento
     {
-        string Descripcion {get; set; } 
-        int Defensa {get; set; }
+        public string Descripcion {get; set; } 
+        public int Daño {get; set;} 
+        public int Defensa {get; set; }
 
         public Armadura (string descripcion, int defensa)
         {
             this.Descripcion = descripcion;
+            this.Daño = 0;
             this.Defensa = defensa;
         }
     }
