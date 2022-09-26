@@ -10,7 +10,7 @@ public class ExampleTest
     public void TestAtaqueAMuerto()
     {
         Elfo elfo1 = new Elfo("Juan");
-        elfo1.SetVida(0);
+        elfo1.Vida = 0;
         Enano enano1 = new Enano("Roberto");
         string Actual = enano1.Ataque(elfo1);
         string Expected = "Dejalo, ya está muerto";
@@ -24,7 +24,7 @@ public class ExampleTest
     {
         Elfo elfo1 = new Elfo("Juan");
         Enano enano1 = new Enano("Roberto");
-        enano1.SetVida(0);
+        enano1.Vida = 0;
         string Actual = enano1.Ataque(elfo1);
         string Expected = "No se puede atacar con un personaje muerto";
         Assert.AreEqual(Actual, Expected);
@@ -68,10 +68,10 @@ public class ExampleTest
     {
         Elfo elfo1 = new Elfo("Elfonso");
         Enano enano2 = new Enano("eaa con palo");
-        int inicial = enano2.GetVida();
+        int inicial = enano2.Vida();
         elfo1.Atacar(enano2);
-        int Actual = enano2.GetVida();
-        int Expected = inicial - elfo1.GetAtaque;
+        int Actual = enano2.Vida();
+        int Expected = inicial - elfo1.Ataque;
         Assert.AreEqual(Actual, Expected);
     }
 
@@ -83,10 +83,10 @@ public class ExampleTest
     {
         Enano enano1 = new Enano("Petizo con palo");
         Elfo elfo2 = new Elfo("Elfonso");
-        int inicial = elfo2.GetVida();
+        int inicial = elfo2.Vida();
         enano1.Atacar(elfo2);
-        int Actual = elfo2.GetVida();
-        int Expected = inicial - enano1.GetAtaque;
+        int Actual = elfo2.Vida();
+        int Expected = inicial - enano1.Ataque;
         Assert.AreEqual(Actual, Expected);
     }
 
@@ -96,10 +96,10 @@ public class ExampleTest
     {
         Mago mago1 = new Mago("Ma gordito");
         Elfo elfo3 = new Elfo("Elfonso");
-        int inicial = elfo3.GetVida();
+        int inicial = elfo3.Vida();
         mago1.Atacar(elfo3);
-        int Actual = elfo3.GetVida();
-        int Expected = inicial - mago1.GetAtaque;
+        int Actual = elfo3.Vida();
+        int Expected = inicial - mago1.Ataque;
         Assert.AreEqual(Actual, Expected);
     }
 
@@ -111,7 +111,7 @@ public class ExampleTest
         Elfo elfo1 = new Elfo("Elfonso");
         Enano enano2 = new Enano("Pete con palo");
         elfo1.UsarHabilidad(enano2);
-        int Actual = enano2.GetVida();
+        int Actual = enano2.Vida();
         int Expected = Actual + elfo1.UsarHabilidad;
         Assert.AreEqual(Actual, Expected);
     }
@@ -204,7 +204,7 @@ public class ExampleTest
     public void HabilidadAMuerto()
     {
         Elfo elfo1 = new Elfo("Juan");
-        elfo1.SetVida(0);
+        elfo1.Vida = 0;
         Enano enano1 = new Enano("Roberto");
         string Actual = enano1.UsarHabilidad(elfo1);
         string Expected = "No se puede tirar la habilidad a un personaje muerto";
@@ -218,7 +218,7 @@ public class ExampleTest
     {
         Elfo elfo1 = new Elfo("Juan");
         Enano enano1 = new Enano("Roberto");
-        enano1.SetVida(0);
+        enano1.Vida = 0;
         string Actual = enano1.UsarHabilidad(elfo1);
         string Expected = "No se puede tirar la habilidad con un personaje muerto";
         Assert.AreEqual(Actual, Expected);
@@ -229,7 +229,7 @@ public class ExampleTest
     public void MuertoDespuesAtacar()
     {
         Elfo elfo1 = new Elfo("Juan");
-        elfo1.SetVida(1);
+        elfo1.Vida = 1;
         Enano enano1 = new Enano("Roberto");
         string Actual = enano1.Ataque(elfo1);
         string Expected = "0";// Habria que poner que cuando lo ataca retorne un string con la vida, si es igual a 0, esta muerto.
@@ -241,25 +241,22 @@ public class ExampleTest
     public void DañoCorrectoConDefensa()
     {
         Elfo elfo1 = new Elfo("Juan");
-        elfo1.SetVida(100);
-        elfo1.SetDefensa(10);
+        elfo1.Vida = 100;
+        elfo1.Defensa = 10;
         Enano enano1 = new Enano("Roberto");
-        enano1.SetAtaque(20);
+        enano1.Ataque = 20;
         string Actual = enano1.Ataque(elfo1);
         string Expected = (90);// Habria que poner que cuando lo ataca retorne un string con la vida, si es igual a 0, esta muerto.
         Assert.AreEqual(Actual, Expected);
     }
 
-
-
+    
+    
 }
-
 /*
-daño correcto con escudo (ataque-defensa) pablito
 agregar hechizo a libro correcto
 hechizo repetido no permitido
 calculo de ataque y defensa correcto en libro con ciertos hechizos
-vida queda en 0 *+
 vida maxima alccanzada con cura
 1 de daño cuando defensa > ataque
 */
