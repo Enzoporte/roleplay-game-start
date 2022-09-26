@@ -9,8 +9,22 @@ namespace Roleplay
         public Escudo(string descripcion, int  daño, int defensa)
         {
             this.Descripcion = descripcion;
-            this.Daño = daño;
-            this.Defensa = defensa;
+            if(daño > 50)
+            {
+                this.Daño = 50;
+            }
+            else
+            {
+                this.Daño = daño;
+            }
+            if(defensa > 50)
+            {
+                this.Defensa = 50;
+            }
+            else
+            {
+                this.Defensa = defensa;
+            }
         }
     }
 }

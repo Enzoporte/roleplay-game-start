@@ -18,7 +18,7 @@ namespace Roleplay
         public float VidaMaxima {get; set;}
         public int Daño {get; set;}
         public int Defensa {get; set;}
-        public bool IsVivo {get; set;}
+        public bool IsVivo {get; set;} = true;
         public List<IElemento> Inventario {get; set;}
         
 
@@ -34,12 +34,15 @@ namespace Roleplay
             this.Inventario = new List<IElemento>();
         }
         
-        public void Atacar(IPersonaje other)
+        public string Atacar(IPersonaje other)
         {
+            if (!this.IsVivo||this.Vida==0)
+            {
+                return "No se puede atacar con un personaje muerto";
+            }
             if (!(other.IsVivo))
             {
-                Console.WriteLine("Dejalo, ya está muerto");
-                return;
+                return "Dejalo, ya está muerto";
             }
 
             if (other.Defensa < this.Daño)
@@ -48,30 +51,41 @@ namespace Roleplay
                 if (other.Vida <= 0)
                 {
                     other.IsVivo = false;
+                    return "0";
                 }
-                Console.WriteLine($"{other.Nombre} ha muerto!");
-                return;
+                return other.Vida.ToString();
             }
             other.Vida--;
+            return other.Vida.ToString();
         }
 
         // habilidad especial del Enano es un Ataque Fuerte
         // Consiste en un ataque randomizado que puede o pegar más, o pegar menos que un ataque normal
-        public void UsarHabilidad(IPersonaje other)
+        public int UsarHabilidad(IPersonaje other)
         {
             if (!(other.IsVivo))
             {
                 Console.WriteLine("Dejalo, ya está muerto");
-                return;
+                return 0;
             }
 
             Random rand = new Random();
+            if(!(this.IsVivo) || this.Vida==0)
+            {
+                return 0;
+            }
             float Critico = (float)(rand.NextSingle() + 0.5);   //Quizás se podría redondear el num para no dejar la vida en float
+            int Vida = (int)Math.Round(other.Vida, 0);
             other.Vida -= this.Daño * Critico - Defensa;
             if (other.Vida <= 0)
             {
                 other.IsVivo = false;
+                other.Vida = 0;
+                return Vida;
             }
+            float dañoHechoFloat = this.Daño * Critico - Defensa;
+            int dañoHecho = (int)Math.Round(dañoHechoFloat, 0);
+            return dañoHecho;
 
         }
     }

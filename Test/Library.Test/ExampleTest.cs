@@ -1,7 +1,7 @@
 namespace Library.Tests;
 using NUnit.Framework;
 using Roleplay;
-
+using System.Collections.Generic;
 
 public class ExampleTest
 {
@@ -12,8 +12,8 @@ public class ExampleTest
         Elfo elfo1 = new Elfo("Juan");
         elfo1.Vida = 0;
         Enano enano1 = new Enano("Roberto");
-        string Actual = enano1.Ataque(elfo1);
-        string Expected = "Dejalo, ya está muerto";
+        string Actual = enano1.Atacar(elfo1);
+        string Expected = "0";
         Assert.AreEqual(Actual, Expected);
     }
 
@@ -25,7 +25,7 @@ public class ExampleTest
         Elfo elfo1 = new Elfo("Juan");
         Enano enano1 = new Enano("Roberto");
         enano1.Vida = 0;
-        string Actual = enano1.Ataque(elfo1);
+        string Actual = enano1.Atacar(elfo1);
         string Expected = "No se puede atacar con un personaje muerto";
         Assert.AreEqual(Actual, Expected);
     }
@@ -33,45 +33,49 @@ public class ExampleTest
     [Test]
     public void AtaqueDentroRangoArmas()
     {
-        string Actual = new Armas("Espada", 999999);
-        string Expected = "Ataque fuera de rango";
+        Armas arma1 = new Armas("Espada", 999999);
+        int Actual = arma1.Daño;
+        int Expected = 50;
         Assert.AreEqual(Actual, Expected);
     }
 
     [Test]
     public void AtaqueDentroRangoEscudo()
     {
-        string Actual = new Escudo("Viking", 999999, 50);
-        string Expected = "Ataque fuera de rango";
+        Escudo escudo1 = new Escudo("Viking", 999999, 50);
+        int Actual = escudo1.Daño;
+        int Expected = 50;
         Assert.AreEqual(Actual, Expected);
     }
 
     [Test]
     public void DefensaDentroRangoEscudo()
     {
-        string Actual = new Escudo("Viking", 50, 999999);
-        string Expected = "Defensa fuera de rango";
+        Escudo escudo1 = new Escudo("Viking", 50, 999999);
+        int Actual = escudo1.Defensa;
+        int Expected = 50;
         Assert.AreEqual(Actual, Expected);
     }
 
     [Test]
-    public void DefensaDentroRangoArmadra()
+    public void DefensaDentroRangoArmadura()
     {
-        string Actual = new Aramdura("Arma_dura", 999999);
-        string Expected = "Defensa fuera de rango";
+        Armadura armadura1 = new Armadura("Arma_dura", 999999);
+        int Actual = armadura1.Defensa;
+        int Expected = 50;
         Assert.AreEqual(Actual, Expected);
     }
 
-    //No esta creado el metodo GetVida, GetAtaque
+    //No esta creado el metodo GetVida, GetAtacar
     [Test]
     public void DañoCorrectoElfo()
     {
         Elfo elfo1 = new Elfo("Elfonso");
         Enano enano2 = new Enano("eaa con palo");
-        int inicial = enano2.Vida();
+        float inicial = enano2.Vida;
         elfo1.Atacar(enano2);
-        int Actual = enano2.Vida();
-        int Expected = inicial - elfo1.Ataque;
+        float Actual = enano2.Vida;
+        float Expected = inicial - elfo1.Daño+ enano2.Defensa;
         Assert.AreEqual(Actual, Expected);
     }
 
@@ -83,10 +87,10 @@ public class ExampleTest
     {
         Enano enano1 = new Enano("Petizo con palo");
         Elfo elfo2 = new Elfo("Elfonso");
-        int inicial = elfo2.Vida();
+        float inicial = elfo2.Vida;
         enano1.Atacar(elfo2);
-        int Actual = elfo2.Vida();
-        int Expected = inicial - enano1.Ataque;
+        float Actual = elfo2.Vida;
+        float Expected = inicial - enano1.Daño+ elfo2.Defensa;
         Assert.AreEqual(Actual, Expected);
     }
 
@@ -94,12 +98,14 @@ public class ExampleTest
     [Test]
     public void DañoCorrectoMago()
     {
-        Mago mago1 = new Mago("Ma gordito");
+        List<Hechizo> hechizos = new List<Hechizo>();
+        LibroDeHechizos libro1 = new LibroDeHechizos(hechizos);
+        Mago mago1 = new Mago("Ma gordito", libro1);
         Elfo elfo3 = new Elfo("Elfonso");
-        int inicial = elfo3.Vida();
+        float inicial = elfo3.Vida;
         mago1.Atacar(elfo3);
-        int Actual = elfo3.Vida();
-        int Expected = inicial - mago1.Ataque;
+        float Actual = elfo3.Vida;
+        float Expected = inicial - mago1.Daño+ elfo3.Defensa;
         Assert.AreEqual(Actual, Expected);
     }
 
@@ -109,95 +115,16 @@ public class ExampleTest
     public void DefensaCorrectoElfo()
     {
         Elfo elfo1 = new Elfo("Elfonso");
-        Enano enano2 = new Enano("Pete con palo");
-        elfo1.UsarHabilidad(enano2);
-        int Actual = enano2.Vida();
-        int Expected = Actual + elfo1.UsarHabilidad;
+        Enano enano2 = new Enano("Pet con palo");
+        int num = elfo1.UsarHabilidad(enano2);
+        float Actual = enano2.Vida;
+        float Expected = Actual + num;
         Assert.AreEqual(Actual, Expected);
     }
 
     // desde aca estoy yo //
 
-    // Falta hacer el if con los return
-    [Test]
-    public void NotNullElfo()
-    {
-        string Actual = new Elfo("");
-        string Expected = "No se puede crear un elfo con atributos vacios";
-        Assert.AreEqual(Actual, Expected);
-    }
-
-
-    // Falta hacer el if con los return
-    [Test]
-    public void NotNullEnano()
-    {
-        string Actual = new Enano("");
-        string Expected = "No se puede crear un enano con atributos vacios";
-        Assert.AreEqual(Actual, Expected);
-    }
-
-
-
-    // Falta hacer el if con los return
-    [Test]
-    public void NotNullMago()
-    {
-        string Actual = new Mago("");
-        string Expected = "No se puede crear un mago con atributos vacios";
-        Assert.AreEqual(Actual, Expected);
-    }
-
-
-
-
-    // Falta hacer el if con los return
-    [Test]
-    public void NotNullArmadura()
-    {
-        string Actual = new Armadura("", 5);
-        string Expected = "No se puede crear una armadura con atributos vacios";
-        Assert.AreEqual(Actual, Expected);
-    }
-
-
-    // Falta hacer el if con los return
-    [Test]
-    public void NotNullArmas()
-    {
-        string Actual = new Armas("", 5);
-        string Expected = "No se puede crear un arma con atributos vacios";
-        Assert.AreEqual(Actual, Expected);
-    }
-
-
-    // Falta hacer el if con los return
-    [Test]
-    public void NotNullElemento()
-    {
-        string Actual = new Elemento("", 5);
-        string Expected = "No se puede crear un elemento con atributos vacios";
-        Assert.AreEqual(Actual, Expected);
-    }
-
-    //Falta hacer el if con los return
-    [Test]
-    public void NotNullEscudo()
-    {
-        string Actual = new Escudo("", 5);
-        string Expected = "No se puede crear un escudo con atributos vacios";
-        Assert.AreEqual(Actual, Expected);
-    }
-
-    //Falta hacer el if con los return
-    [Test]
-    public void NotNullLibro()
-    {
-        string Actual = new LibroDeHechizos("", 5, 1);
-        string Expected = "No se puede crear un libro de hechizos con atributos vacios";
-        Assert.AreEqual(Actual, Expected);
-    }
-
+    
 
     // No esta creado el metodo setvida
     [Test]
@@ -206,8 +133,8 @@ public class ExampleTest
         Elfo elfo1 = new Elfo("Juan");
         elfo1.Vida = 0;
         Enano enano1 = new Enano("Roberto");
-        string Actual = enano1.UsarHabilidad(elfo1);
-        string Expected = "No se puede tirar la habilidad a un personaje muerto";
+        int Actual = enano1.UsarHabilidad(elfo1);
+        int Expected = 0;
         Assert.AreEqual(Actual, Expected);
     }
     //ta todo mal
@@ -219,8 +146,8 @@ public class ExampleTest
         Elfo elfo1 = new Elfo("Juan");
         Enano enano1 = new Enano("Roberto");
         enano1.Vida = 0;
-        string Actual = enano1.UsarHabilidad(elfo1);
-        string Expected = "No se puede tirar la habilidad con un personaje muerto";
+        int Actual = enano1.UsarHabilidad(elfo1);
+        int Expected = 0;
         Assert.AreEqual(Actual, Expected);
     }
 
@@ -231,7 +158,7 @@ public class ExampleTest
         Elfo elfo1 = new Elfo("Juan");
         elfo1.Vida = 1;
         Enano enano1 = new Enano("Roberto");
-        string Actual = enano1.Ataque(elfo1);
+        string Actual = enano1.Atacar(elfo1);
         string Expected = "0";// Habria que poner que cuando lo ataca retorne un string con la vida, si es igual a 0, esta muerto.
         Assert.AreEqual(Actual, Expected);
     }
@@ -244,9 +171,9 @@ public class ExampleTest
         elfo1.Vida = 100;
         elfo1.Defensa = 10;
         Enano enano1 = new Enano("Roberto");
-        enano1.Ataque = 20;
-        string Actual = enano1.Ataque(elfo1);
-        string Expected = (90);// Habria que poner que cuando lo ataca retorne un string con la vida, si es igual a 0, esta muerto.
+        enano1.Daño = 20;
+        string Actual = enano1.Atacar(elfo1);
+        string Expected = "90";// Habria que poner que cuando lo ataca retorne un string con la vida, si es igual a 0, esta muerto.
         Assert.AreEqual(Actual, Expected);
     }
 

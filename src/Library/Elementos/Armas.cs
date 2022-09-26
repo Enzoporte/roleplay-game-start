@@ -7,11 +7,21 @@ namespace Roleplay
         public int Daño {get; set;} 
         public int Defensa {get; set; }
 
+        private int MaxAtaque = 50;
+
         public Armas(string descripcion, int daño)
         {
             this.Descripcion = descripcion;
-            this.Daño = daño;
+            if(daño>MaxAtaque)
+            {
+                this.Daño = MaxAtaque;
+            }
+            else
+            {
+                this.Daño = daño;
+            }
             this.Defensa = 0;
+            
         }
     }
 }
