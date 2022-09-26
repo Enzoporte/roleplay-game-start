@@ -1,6 +1,6 @@
 namespace Roleplay
 {
-    public class InventarioManager : IInventarioManager
+    public class InventarioManager
     {
         public static void AgregarItem(IElemento itemToAdd, IPersonaje p)
         {

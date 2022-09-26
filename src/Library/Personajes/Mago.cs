@@ -5,7 +5,7 @@ using System.Collections;
 namespace Roleplay
 {
 
-    public class Mago : IPersonaje, IAtaqueHabilidad, IInventarioManager
+    public class Mago : IPersonaje, IAtaqueHabilidad
     {
         // Atributos privados nombre, vida, ataque, defensa, inventario y si está vivo el personaje
         // Propiedades Comunes de los tipos de personajes. Cambian los valores de Defensa y Vida
