@@ -13,7 +13,7 @@ namespace Roleplay
         private int defensa;
         private bool isVivo;
         private int inicialVida = 300;
-        private int inicialAtaque = 1;
+        private int inicialAtaque = 10;
         private int inicialDefensa = 5;
 
         //Constructor como el de Elfo. 
