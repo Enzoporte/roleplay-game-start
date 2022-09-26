@@ -1,10 +1,10 @@
 namespace Roleplay
 {
-    public class Escudo
+    public class Escudo : IElemento
     {
-        string Descripcion { get; set; }
-        int Daño { get; set; }
-        int Defensa { get; set; }
+        public string Descripcion {get; set; } 
+        public int Daño {get; set;} 
+        public int Defensa {get; set; }
 
         public Escudo(string descripcion, int  daño, int defensa)
         {
