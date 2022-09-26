@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Roleplay
 {
-    public class Elfo : IPersonaje, IAtaqueHabilidad
+    public class Elfo : IPersonaje, IAtaqueHabilidad 
     {
         // Atributos privados nombre, vida, ataque, defensa, inventario y si está vivo el personaje
         // Propiedades Comunes de los tipos de personajes. Cambian los valores de Defensa y Vida
@@ -14,12 +14,12 @@ namespace Roleplay
         private int inicialDefensa = 5;
         private int poderCuracion = 10;
 
-        public string Nombre {get;}
-        public float Vida {get; set;}
-        public float VidaMaxima {get; set;}
-        public int Daño {get; set;}
-        public int Defensa {get; set;}
-        public bool IsVivo {get; set;}
+        public string Nombre { get; }
+        public float Vida { get; set; }
+        public float VidaMaxima { get; set; }
+        public int Daño { get; set; }
+        public int Defensa { get; set; }
+        public bool IsVivo { get; set; } = true;
         public List<IElemento> Inventario { get; set; }
 
 
@@ -37,48 +37,55 @@ namespace Roleplay
             this.Inventario = new List<IElemento>();
         }
 
-        public void Atacar(IPersonaje other)
+        public string Atacar(IPersonaje other)
         {
-            if (!(other.IsVivo)) 
+            if (!(other.IsVivo))
             {
-                Console.WriteLine("Dejalo, ya está muerto");
-                return;
+                return "Dejalo, ya está muerto";
             }
 
-            if (other.Defensa < this.Daño) 
+            if (other.Defensa < this.Daño)
             {
                 other.Vida -= (this.Daño - other.Defensa);
                 if (other.Vida <= 0)
                 {
                     other.IsVivo = false;
+                    return $"{other.Nombre} ha muerto!";
                 }
-                Console.WriteLine($"{other.Nombre} ha muerto!");
-                return;
+                return other.Vida.ToString();
             }
             other.Vida--;
+            return other.Vida.ToString();
         }
-        
-        public void UsarHabilidad(IPersonaje other)
+
+        public int UsarHabilidad(IPersonaje other)
         {
+            if(!(this.IsVivo))
+            {
+                Console.WriteLine($"{this.Nombre} está muerto.");
+                return 0;
+            }
             // --- Curar ---
-           if (!(other.IsVivo))
-           {
+            if (!(other.IsVivo))
+            {
                 Console.WriteLine($"{other.Nombre} está muerto, no puedes curarlo.");
-                return;
-           }
+                return 0;
+            }
 
-           if (other.Vida >= other.VidaMaxima)
-           {
+            if (other.Vida >= other.VidaMaxima)
+            {
                 Console.WriteLine($"{other.Nombre} ya tiene su vida al máximo");
-                return;
-           }
+                return 0;
+            }
 
-           other.Vida += poderCuracion;
-           if (other.Vida > other.VidaMaxima)
-           {
+            other.Vida += this.poderCuracion;
+            if (other.Vida > other.VidaMaxima)
+            {
+                int curado = (int)Math.Round(VidaMaxima, 0)-(int)Math.Round(other.Vida, 0);
                 other.Vida = VidaMaxima;
-           }
-
+                return curado;
+            }
+            return this.poderCuracion;
         }
     }
 }

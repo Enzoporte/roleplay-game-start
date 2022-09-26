@@ -39,12 +39,11 @@ namespace Roleplay
             this.Inventario = new List<IElemento>();
         }
 
-        public void Atacar(IPersonaje other)
+        public string Atacar(IPersonaje other)
         {
             if (!(other.IsVivo))
             {
-                Console.WriteLine("Dejalo, ya está muerto");
-                return;
+                return "Dejalo, ya está muerto";
             }
 
             if (other.Defensa < this.Daño)
@@ -53,19 +52,20 @@ namespace Roleplay
                 if (other.Vida <= 0)
                 {
                     other.IsVivo = false;
-                    Console.WriteLine($"{other.Nombre} ha muerto!");
+                    return $"{other.Nombre} ha muerto!";
                 }
-                return;
+                return other.Vida.ToString();
             }
             other.Vida--;
+            return other.Vida.ToString();
         }
 
-        public void UsarHabilidad(IPersonaje other)
+        public int UsarHabilidad(IPersonaje other)
         {
             if (!(other.IsVivo))
             {
                 Console.WriteLine("Dejalo, ya está muerto");
-                return;
+                return 0;
             }
             if (other.Defensa < this.LibroDeHechizos.CurrentHechizo.Daño)
             {
@@ -75,9 +75,11 @@ namespace Roleplay
                     other.IsVivo = false;
                     Console.WriteLine($"{other.Nombre} ha muerto!");
                 }
-                return;
+                float num = (this.LibroDeHechizos.CurrentHechizo.Daño - other.Defensa);
+                return (int)Math.Round(num, 0);
             }
             other.Vida--;
+            return 1;
         }
 
 
