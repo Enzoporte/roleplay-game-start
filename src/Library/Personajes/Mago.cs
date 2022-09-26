@@ -18,6 +18,7 @@ namespace Roleplay
 
         public string Nombre {get;}
         public float Vida {get; set;}
+        public float VidaMaxima {get; set;}
         public int Daño {get; set;}
         public int Defensa {get; set;}
         public bool IsVivo {get; set;}
@@ -30,6 +31,7 @@ namespace Roleplay
         {
             this.Nombre = nombre;
             this.Vida = inicialVida;
+            this.VidaMaxima = inicialVida;
             this.Daño = inicialAtaque;
             this.Defensa = inicialDefensa;
             this.IsVivo = true;

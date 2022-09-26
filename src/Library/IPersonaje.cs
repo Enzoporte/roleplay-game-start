@@ -3,23 +3,12 @@ namespace Roleplay
     public interface IPersonaje
     {
 
-        string Nombre { get; set; }
+        string Nombre { get; }
         float Vida { get; set; }
+        float VidaMaxima { get; set; }
         int Daño { get; set; }
-        int defensa { get; set; }
-        bool isVivo { get; set; }
-
-        public void Atacar()
-        {
-
-        }
-
-        public void UsarHabilidad()
-        {
-
-        }
-
-
+        int Defensa { get; set; }
+        bool IsVivo { get; set; }
 
     }
 }
