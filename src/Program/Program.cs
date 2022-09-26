@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using static Roleplay.InventarioManager;
 
 namespace Roleplay
@@ -7,12 +8,19 @@ namespace Roleplay
     {
         static void Main(string[] args)
         {
+            //Setup----------------------------------------------
+            //Cosas
+            List<Hechizo> hechizo = new List<Hechizo>();
+            hechizo.Add(new Hechizo("Fuego", 1, 0));
+            LibroDeHechizos l = new LibroDeHechizos(hechizo);
+
             //Equipo A
-            IPersonaje mago = new Mago("Gonza el mago");
+            IPersonaje mago = new Mago("Gonza el mago", l);
             IPersonaje elfo = new Elfo("Pablo el elfo");
 
             //Equipo B
             IPersonaje enano = new Enano("Enzo el enano");
+            //--------------------------------------------------
 
             mago.Atacar(enano);
 
